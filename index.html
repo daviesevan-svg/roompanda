@@ -301,16 +301,16 @@
             <button class="codetab" data-codetab="python" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;border-radius:9px 9px 0 0;padding:9px 16px;">Python</button>
           </div>
           <div style="background:#1b1e20;">
-<pre class="code-sample active" data-code="curl" style="margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#d4d7ce;overflow:auto;min-height:230px;">curl https://api.roompanda.com/v1/availability \
-  -H "Authorization: Bearer sk_live_panda" \
-  -d property_id=the-laurel \
+<pre class="code-sample active" data-code="curl" style="margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#d4d7ce;overflow:auto;min-height:230px;">curl https://book.roompanda.com/v1/availability \
+  -H "Authorization: Bearer sk_test_2b1c…" \
+  -G \
   -d checkin=2026-09-12 \
   -d checkout=2026-09-15 \
-  -d guests=2
+  -d adults=2
 
-# => [{ "room": "garden-view-king",
-#      "name": "Garden View King",
-#      "rate": 189, "currency": "EUR" }, ...]</pre>
+# => { "data": [{ "id": "garden-suite",
+#      "title": "Garden Suite", "rates": [
+#      { "total_price": "420.00", "currency": "GBP" }]}]}</pre>
 <pre class="code-sample" data-code="node" style="margin:0;padding:20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#d4d7ce;overflow:auto;min-height:230px;">import { Roompanda } from "@roompanda/sdk";
 
 const panda = new Roompanda(process.env.PANDA_KEY);
