@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build on Roompanda — Developer docs</title>
+<meta name="description" content="Roompanda developer documentation: a clean REST API, real-time webhooks, first-party SDKs and an MCP server. Everything you need to wire bookings into anything.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div style="background:#f7f5ef;">
+
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(247,245,239,0.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #ebe6db;">
+    <div style="max-width:1180px;margin:0 auto;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;">
+      <a href="index.html" style="display:flex;align-items:center;gap:11px;">
+        <svg viewBox="0 0 100 100" width="38" height="38" style="display:block;" aria-hidden="true">
+          <circle cx="24" cy="22" r="14" fill="#1d1f1e"></circle><circle cx="76" cy="22" r="14" fill="#1d1f1e"></circle>
+          <circle cx="50" cy="52" r="34" fill="#ffffff" stroke="#e4dfd2" stroke-width="1.5"></circle>
+          <ellipse cx="36" cy="48" rx="11" ry="14" fill="#1d1f1e" transform="rotate(-18 36 48)"></ellipse>
+          <ellipse cx="64" cy="48" rx="11" ry="14" fill="#1d1f1e" transform="rotate(18 64 48)"></ellipse>
+          <circle cx="38" cy="49" r="4.6" fill="#ffffff"></circle><circle cx="62" cy="49" r="4.6" fill="#ffffff"></circle>
+          <circle cx="39" cy="50.5" r="2.2" fill="#1d1f1e"></circle><circle cx="61" cy="50.5" r="2.2" fill="#1d1f1e"></circle>
+          <ellipse cx="50" cy="64" rx="5" ry="3.6" fill="#1d1f1e"></ellipse>
+        </svg>
+        <span style="font-family:'Baloo 2',cursive;font-weight:800;font-size:23px;letter-spacing:-0.01em;line-height:1;">Roompanda</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#3e7d56;background:#eaf4ee;border:1px solid #d8ecdf;border-radius:7px;padding:3px 9px;margin-left:2px;">docs</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:600;color:#55584f;">
+        <a class="navlink" href="#quickstart" data-wide="1">Quickstart</a>
+        <a class="navlink" href="#api" data-wide="1">API</a>
+        <a class="navlink" href="#mcp" data-wide="1">MCP</a>
+        <a class="navlink" href="#webhooks" data-wide="1">Webhooks</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a class="navlink" href="index.html" style="font-size:14.5px;font-weight:600;color:#55584f;" data-wide="1">← Home</a>
+        <a class="btn-dark" href="index.html#signup" style="background:#16181a;color:#fff;font-size:14.5px;font-weight:700;border-radius:11px;padding:11px 20px;">Get API key</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" style="align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #e3ddcf;background:#fff;border-radius:11px;cursor:pointer;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d1f1e" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" style="flex-direction:column;gap:4px;padding:8px 26px 16px;border-top:1px solid #ebe6db;font-size:15px;font-weight:600;color:#55584f;">
+      <a href="#quickstart" style="padding:10px 0;">Quickstart</a>
+      <a href="#auth" style="padding:10px 0;">Authentication</a>
+      <a href="#api" style="padding:10px 0;">API reference</a>
+      <a href="#mcp" style="padding:10px 0;">MCP server</a>
+      <a href="#webhooks" style="padding:10px 0;">Webhooks</a>
+      <a href="#sdks" style="padding:10px 0;">SDKs</a>
+      <a href="index.html" style="padding:10px 0;">← Home</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section style="border-bottom:1px solid #ebe6db;background:linear-gradient(180deg,#f7f5ef,#fbf9f3);">
+    <div style="max-width:1180px;margin:0 auto;padding:60px 26px 56px;display:flex;gap:50px;align-items:center;flex-wrap:wrap;">
+      <div style="flex:1.1;min-width:320px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.08em;color:#3e9e63;font-weight:600;margin-bottom:16px;">api.roompanda.com/v1</div>
+        <h1 class="hero-h1" style="font-family:'Baloo 2',cursive;font-weight:800;font-size:54px;line-height:1.03;letter-spacing:-0.025em;margin:0 0 18px;">Build on Roompanda.</h1>
+        <p style="font-size:18.5px;line-height:1.62;color:#55584f;margin:0 0 26px;max-width:500px;">A clean REST API, real-time webhooks, first-party SDKs and an MCP server — everything you need to wire bookings into anything. Same engine that powers the storefront, fully programmable.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn-green" href="#quickstart" style="background:#3e9e63;color:#fff;font-size:15.5px;font-weight:700;border-radius:12px;padding:14px 24px;box-shadow:0 12px 24px -12px rgba(62,158,99,0.85);">Quickstart</a>
+          <a class="btn-outline" href="#api" style="background:#fff;border:1px solid #e3ddcf;color:#2a2c28;font-size:15.5px;font-weight:700;border-radius:12px;padding:14px 24px;">API reference</a>
+        </div>
+      </div>
+      <div style="flex:1;min-width:300px;">
+        <div style="background:#16181a;border-radius:16px;overflow:hidden;box-shadow:0 34px 70px -34px rgba(20,30,22,0.55);">
+          <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid #2a2d30;">
+            <span style="width:10px;height:10px;border-radius:50%;background:#e6a09a;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#eccf94;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#a9d6ad;"></span>
+            <span style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d8079;">first_booking.sh</span>
+          </div>
+          <pre style="padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;color:#d4d7ce;overflow:auto;"><span style="color:#7d8079;"># 1 · check what's free</span>
+curl api.roompanda.com/v1/availability \
+  -H <span style="color:#e3c08a;">"Authorization: Bearer sk_live_panda"</span> \
+  -d property_id=the-laurel -d guests=2
+
+<span style="color:#7d8079;"># 2 · book it</span>
+curl -X POST api.roompanda.com/v1/bookings \
+  -H <span style="color:#e3c08a;">"Authorization: Bearer sk_live_panda"</span> \
+  -d room=garden-view-king \
+  -d checkin=2026-09-12 -d nights=3
+
+<span style="color:#7fd6a0;">→ 201 Created  { "id": "bk_7QX2P" }</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCS BODY -->
+  <div style="max-width:1180px;margin:0 auto;display:flex;gap:0;align-items:flex-start;">
+    <!-- TOC -->
+    <aside data-toc="1" style="position:sticky;top:72px;flex:none;width:212px;padding:44px 0 60px 26px;align-self:flex-start;">
+      <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:14px;">On this page</div>
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:14px;font-weight:600;">
+        <a class="toc-link" href="#quickstart" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Quickstart</a>
+        <a class="toc-link" href="#auth" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Authentication</a>
+        <a class="toc-link" href="#api" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">API reference</a>
+        <a class="toc-link" href="#mcp" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">MCP server</a>
+        <a class="toc-link" href="#webhooks" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Webhooks</a>
+        <a class="toc-link" href="#sdks" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">SDKs</a>
+      </div>
+      <div style="margin-top:24px;background:#eaf4ee;border:1px solid #d8ecdf;border-radius:13px;padding:16px;">
+        <div style="font-weight:700;font-size:13.5px;margin-bottom:5px;">Need a hand?</div>
+        <div style="font-size:12.5px;color:#3c5446;line-height:1.5;">Our developer pandas reply fast at <span style="font-family:'JetBrains Mono',monospace;color:#2f7d4d;">dev@roompanda.com</span></div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main data-docmain="1" style="flex:1;min-width:0;padding:44px 26px 80px 40px;">
+
+      <!-- QUICKSTART -->
+      <section id="quickstart" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">Quickstart</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 26px;max-width:640px;">From zero to a confirmed booking in three steps. Grab a key, install an SDK, make a call.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #ebe6db;border-radius:14px;padding:20px 22px;">
+            <span style="width:30px;height:30px;border-radius:50%;background:#16181a;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;">1</span>
+            <div><div style="font-weight:700;font-size:16px;margin-bottom:3px;">Create an API key</div><div style="font-size:14.5px;color:#63665d;line-height:1.55;">In your dashboard under <strong>Settings → Developers</strong>. Test keys start with <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_test_</span>, live keys with <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_live_</span>.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #ebe6db;border-radius:14px;padding:20px 22px;">
+            <span style="width:30px;height:30px;border-radius:50%;background:#16181a;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;">2</span>
+            <div style="flex:1;min-width:0;">
+              <div style="font-weight:700;font-size:16px;margin-bottom:10px;">Install the SDK</div>
+              <div style="display:flex;gap:6px;margin-bottom:10px;">
+                <button class="sdktab" data-sdk="npm" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;border-radius:9px;padding:7px 14px;cursor:pointer;">npm</button>
+                <button class="sdktab" data-sdk="pip" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;border-radius:9px;padding:7px 14px;cursor:pointer;">pip</button>
+              </div>
+              <pre id="sdkInstall" style="background:#16181a;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#d4d7ce;overflow:auto;">npm install @roompanda/sdk</pre>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #ebe6db;border-radius:14px;padding:20px 22px;">
+            <span style="width:30px;height:30px;border-radius:50%;background:#3e9e63;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;">3</span>
+            <div><div style="font-weight:700;font-size:16px;margin-bottom:3px;">Make your first call</div><div style="font-size:14.5px;color:#63665d;line-height:1.55;">Fetch availability, then POST a booking. That's the whole loop — see the reference below for every field.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AUTH -->
+      <section id="auth" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">Authentication</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 20px;max-width:640px;">Every request is authenticated with a bearer token. Keep secret keys server-side; scope tokens per property and per capability so a leaked key can only do what you allowed.</p>
+        <pre style="background:#16181a;border-radius:13px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#d4d7ce;overflow:auto;">Authorization: Bearer sk_live_panda
+Content-Type:  application/json</pre>
+      </section>
+
+      <!-- API REFERENCE -->
+      <section id="api" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">API reference</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 22px;max-width:640px;">Predictable, resource-oriented endpoints with JSON bodies and standard HTTP codes. The core six:</p>
+        <div style="background:#fff;border:1px solid #ebe6db;border-radius:16px;overflow:hidden;">
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/properties</span>
+            <span style="font-size:14px;color:#76796f;">List your properties &amp; settings</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/availability</span>
+            <span style="font-size:14px;color:#76796f;">Bookable rooms &amp; rates for dates</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/rates</span>
+            <span style="font-size:14px;color:#76796f;">Rate plans &amp; restrictions</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#9a6b2f;background:#f6ecdb;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">POST</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/bookings</span>
+            <span style="font-size:14px;color:#76796f;">Create a confirmed booking</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/bookings/:id</span>
+            <span style="font-size:14px;color:#76796f;">Retrieve a booking</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:16px 22px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#9a6b2f;background:#f6ecdb;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">POST</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:200px;">/v1/bookings/:id/cancel</span>
+            <span style="font-size:14px;color:#76796f;">Cancel &amp; release inventory</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;">
+          <div style="flex:1;min-width:300px;">
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Request</div>
+            <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">POST /v1/bookings
+{
+  <span style="color:#7fd6a0;">"property"</span>: <span style="color:#e3c08a;">"the-laurel"</span>,
+  <span style="color:#7fd6a0;">"room"</span>:     <span style="color:#e3c08a;">"garden-view-king"</span>,
+  <span style="color:#7fd6a0;">"rate"</span>:     <span style="color:#e3c08a;">"flexible"</span>,
+  <span style="color:#7fd6a0;">"checkin"</span>:  <span style="color:#e3c08a;">"2026-09-12"</span>,
+  <span style="color:#7fd6a0;">"nights"</span>:   <span style="color:#9bd1e6;">3</span>,
+  <span style="color:#7fd6a0;">"guest"</span>: { <span style="color:#7fd6a0;">"name"</span>: <span style="color:#e3c08a;">"Jamie Doyle"</span> }
+}</pre>
+          </div>
+          <div style="flex:1;min-width:300px;">
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Response · 201</div>
+            <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">{
+  <span style="color:#7fd6a0;">"id"</span>:       <span style="color:#e3c08a;">"bk_7QX2P"</span>,
+  <span style="color:#7fd6a0;">"status"</span>:   <span style="color:#e3c08a;">"confirmed"</span>,
+  <span style="color:#7fd6a0;">"total"</span>:    <span style="color:#9bd1e6;">620</span>,
+  <span style="color:#7fd6a0;">"currency"</span>: <span style="color:#e3c08a;">"EUR"</span>,
+  <span style="color:#7fd6a0;">"cancel_by"</span>: <span style="color:#e3c08a;">"2026-09-11T15:00Z"</span>
+}</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- MCP -->
+      <section id="mcp" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#eaf4ee;color:#2f7d4d;border-radius:999px;padding:5px 13px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:14px;">Model Context Protocol</div>
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">MCP server</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 22px;max-width:660px;">Point any MCP-compatible AI client at Roompanda and it can search, price and book on a guest's behalf — using the same scoped tokens and rate fences as the REST API. Bookings are real and land straight in your calendar.</p>
+
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;">
+          <div style="flex:1;min-width:300px;">
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Connect a client</div>
+            <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">{
+  <span style="color:#7fd6a0;">"mcpServers"</span>: {
+    <span style="color:#7fd6a0;">"roompanda"</span>: {
+      <span style="color:#7fd6a0;">"url"</span>: <span style="color:#e3c08a;">"https://mcp.roompanda.com/sse"</span>,
+      <span style="color:#7fd6a0;">"headers"</span>: {
+        <span style="color:#7fd6a0;">"Authorization"</span>: <span style="color:#e3c08a;">"Bearer sk_live_panda"</span>
+      }
+    }
+  }
+}</pre>
+          </div>
+          <div style="flex:1;min-width:300px;">
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Exposed tools</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">search_availability</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Find bookable rooms for dates &amp; guests.</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">get_room</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Full detail, photos &amp; rate plans for a room.</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">book_room</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Place a real, confirmed reservation.</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">cancel_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Cancel within your cancellation policy.</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#eaf4ee;border:1px solid #d8ecdf;border-radius:13px;padding:15px 18px;font-size:14px;color:#3c5446;line-height:1.55;display:flex;gap:11px;"><span style="width:8px;height:8px;background:#3e9e63;transform:rotate(45deg);flex:none;margin-top:6px;"></span><div>Agents only see what your token allows. Set per-tool permissions, maximum nightly rates and an optional human-approval step for bookings over a threshold.</div></div>
+      </section>
+
+      <!-- WEBHOOKS -->
+      <section id="webhooks" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">Webhooks</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 20px;max-width:640px;">Subscribe to events and we'll POST a signed payload to your endpoint the moment anything changes — no polling required.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe6db;border-radius:11px;padding:12px 15px;"><span style="width:8px;height:8px;border-radius:50%;background:#3e9e63;flex:none;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;">booking.created</span></div>
+            <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe6db;border-radius:11px;padding:12px 15px;"><span style="width:8px;height:8px;border-radius:50%;background:#3e9e63;flex:none;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;">booking.modified</span></div>
+            <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe6db;border-radius:11px;padding:12px 15px;"><span style="width:8px;height:8px;border-radius:50%;background:#c98a4b;flex:none;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;">booking.cancelled</span></div>
+            <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe6db;border-radius:11px;padding:12px 15px;"><span style="width:8px;height:8px;border-radius:50%;background:#3e9e63;flex:none;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;">payment.succeeded</span></div>
+          </div>
+          <div style="flex:1.4;min-width:300px;">
+            <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">POST  https://your-app.com/hooks
+X-Roompanda-Signature: t=...,v1=...
+
+{
+  <span style="color:#7fd6a0;">"event"</span>: <span style="color:#e3c08a;">"booking.created"</span>,
+  <span style="color:#7fd6a0;">"data"</span>: {
+    <span style="color:#7fd6a0;">"id"</span>:       <span style="color:#e3c08a;">"bk_7QX2P"</span>,
+    <span style="color:#7fd6a0;">"property"</span>: <span style="color:#e3c08a;">"the-laurel"</span>,
+    <span style="color:#7fd6a0;">"room"</span>:     <span style="color:#e3c08a;">"garden-view-king"</span>,
+    <span style="color:#7fd6a0;">"nights"</span>:   <span style="color:#9bd1e6;">3</span>,
+    <span style="color:#7fd6a0;">"total"</span>:    <span style="color:#9bd1e6;">620</span>,
+    <span style="color:#7fd6a0;">"source"</span>:   <span style="color:#e3c08a;">"mcp-agent"</span>
+  }
+}</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- SDKS -->
+      <section id="sdks" style="margin-bottom:20px;scroll-margin-top:80px;">
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">SDKs &amp; tools</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 22px;max-width:640px;">First-party libraries with full types, plus an OpenAPI spec to generate a client in any language.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+          <div class="card" style="background:#fff;border:1px solid #ebe6db;border-radius:15px;padding:22px;">
+            <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:19px;margin-bottom:6px;">Node / TS</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#3e7d56;margin-bottom:12px;">@roompanda/sdk</div>
+            <p style="font-size:13.5px;color:#63665d;line-height:1.5;margin:0;">Fully typed, promise-based, works in Node &amp; edge runtimes.</p>
+          </div>
+          <div class="card" style="background:#fff;border:1px solid #ebe6db;border-radius:15px;padding:22px;">
+            <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:19px;margin-bottom:6px;">Python</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#3e7d56;margin-bottom:12px;">pip install roompanda</div>
+            <p style="font-size:13.5px;color:#63665d;line-height:1.5;margin:0;">Sync &amp; async clients, typed models, retries built in.</p>
+          </div>
+          <div class="card" style="background:#fff;border:1px solid #ebe6db;border-radius:15px;padding:22px;">
+            <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:19px;margin-bottom:6px;">OpenAPI</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#3e7d56;margin-bottom:12px;">openapi.roompanda.com</div>
+            <p style="font-size:13.5px;color:#63665d;line-height:1.5;margin:0;">Generate a client for Go, Ruby, PHP, Rust — anything.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="background:#101213;color:#9b9e95;">
+    <div style="max-width:1180px;margin:0 auto;padding:40px 26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;">
+      <a href="index.html" style="display:flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true"><circle cx="24" cy="22" r="14" fill="#f3f1ea"></circle><circle cx="76" cy="22" r="14" fill="#f3f1ea"></circle><circle cx="50" cy="52" r="34" fill="#f3f1ea"></circle><ellipse cx="36" cy="48" rx="11" ry="14" fill="#101213" transform="rotate(-18 36 48)"></ellipse><ellipse cx="64" cy="48" rx="11" ry="14" fill="#101213" transform="rotate(18 64 48)"></ellipse><circle cx="38" cy="49" r="4.6" fill="#f3f1ea"></circle><circle cx="62" cy="49" r="4.6" fill="#f3f1ea"></circle><ellipse cx="50" cy="64" rx="5" ry="3.6" fill="#101213"></ellipse></svg>
+        <span style="font-family:'Baloo 2',cursive;font-weight:800;font-size:18px;color:#f3f1ea;">Roompanda</span>
+      </a>
+      <span style="font-size:13px;">© 2026 Roompanda · Built by the Channex team · <span style="color:#7fd6a0;">dev@roompanda.com</span></span>
+    </div>
+  </footer>
+
+</div>
+<script src="assets/docs.js"></script>
+</body>
+</html>
