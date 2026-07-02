@@ -69,6 +69,18 @@ a.footlink:hover { color: #f3f1ea; }
   [data-docmain] { padding-left: 26px !important; }
 }
 
+/* Legal pages (privacy / terms) */
+.legal-body { font-size: 16px; line-height: 1.7; color: #3a3d36; }
+.legal-body h2 {
+  font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 22px;
+  letter-spacing: -0.01em; margin: 34px 0 10px;
+}
+.legal-body p { margin: 0 0 14px; }
+.legal-body ul { margin: 0 0 14px; padding-left: 22px; }
+.legal-body li { margin: 0 0 7px; }
+.legal-body a { color: #2f7d4d; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.legal-body a:hover { color: #3e9e63; }
+
 /* Slightly tame the giant hero type on small screens */
 @media (max-width: 560px) {
   .hero-h1 { font-size: 44px !important; }
