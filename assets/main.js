@@ -73,19 +73,4 @@
     mBtn.addEventListener('click', function () { setBilling(false); });
     aBtn.addEventListener('click', function () { setBilling(true); });
   }
-
-  /* ---- Signup form (no backend yet — friendly stub) ---- */
-  var form = document.getElementById('signupForm');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = form.querySelector('input');
-      var btn = form.querySelector('button');
-      if (input && input.value) {
-        btn.textContent = 'Thanks! 🐼';
-        btn.disabled = true;
-        input.disabled = true;
-      }
-    });
-  }
 })();
