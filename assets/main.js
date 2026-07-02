@@ -42,8 +42,7 @@
   /* ---- Pricing billing toggle (Monthly / Annual) ---- */
   var mBtn = document.getElementById('billMonthly');
   var aBtn = document.getElementById('billAnnual');
-  var priceEl = document.getElementById('hostedPrice');
-  var periodEl = document.getElementById('hostedPeriod');
+  var wasEl = document.getElementById('hostedWas');
   var subEl = document.getElementById('hostedSub');
 
   var SEL = { background: '#ffffff', color: '#2a2c28', shadow: '0 2px 6px -2px rgba(0,0,0,0.18)' };
@@ -59,13 +58,11 @@
     applyBtn(mBtn, annual ? OFF : SEL);
     applyBtn(aBtn, annual ? SEL : OFF);
     if (annual) {
-      priceEl.textContent = '$33';
-      periodEl.textContent = '/property/mo';
-      subEl.textContent = 'pay 10, get 12 · billed $390/yr';
+      wasEl.textContent = '$33';
+      subEl.textContent = 'Free during early access — normally $390/yr';
     } else {
-      priceEl.textContent = '$39';
-      periodEl.textContent = '/property/mo';
-      subEl.textContent = 'billed monthly';
+      wasEl.textContent = '$39';
+      subEl.textContent = 'Free during early access — no card needed';
     }
   }
 
