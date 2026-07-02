@@ -55,14 +55,6 @@ npx wrangler pages deploy . --project-name=roompanda
 `_headers` adds basic security headers and asset caching; Cloudflare Pages applies it
 automatically.
 
-## Notes
-
-- Room photos in the live-preview section use placeholder Unsplash images — swap them
-  for real photography before launch.
-- The signup form is a front-end stub (no backend yet); wire it to your provider when
-  ready.
-- Code/SDK samples are illustrative; update endpoints when the real API ships.
-
 ---
 
-Recreated from the Roompanda design handoff. © 2026 Roompanda · Built by the Channex team.
+© 2026 Roompanda · Built by the Channex team.
