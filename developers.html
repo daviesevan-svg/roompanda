@@ -157,7 +157,7 @@ Content-Type:  application/json</pre>
           <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
             <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:210px;">/v1/properties</span>
-            <span style="font-size:14px;color:#76796f;">Your property &amp; its details</span>
+            <span style="font-size:14px;color:#76796f;">Property content: branding, contact, location, brand theme &amp; how prices compose (localizable with <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">?lang=</span>)</span>
           </div>
           <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#2f7d4d;background:#eaf4ee;border-radius:6px;padding:4px 9px;width:54px;text-align:center;flex:none;">GET</span>
@@ -200,7 +200,7 @@ Content-Type:  application/json</pre>
             <span style="font-size:14px;color:#76796f;">Retrieve a booking</span>
           </div>
         </div>
-        <p style="font-size:13.5px;line-height:1.6;color:#76796f;margin:12px 0 0;max-width:640px;">Errors return <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">{ "error": { "type", "message" } }</span> with the matching HTTP status. Send an <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">Idempotency-Key</span> header on <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">POST /v1/bookings</span> to make retries safe.</p>
+        <p style="font-size:13.5px;line-height:1.6;color:#76796f;margin:12px 0 0;max-width:640px;">Errors return <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">{ "error": { "type", "message" } }</span> with the matching HTTP status. Send an <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">Idempotency-Key</span> header on <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">POST /v1/bookings</span> to make retries safe. Add-ons ride along on the booking: per-room ones on <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">rooms[].extras</span>, whole-stay ones in the top-level <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">extras</span> — only ids travel; prices always resolve server-side, and an invalid selection fails the booking with <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">422 invalid_extra</span> rather than silently dropping a paid add-on.</p>
 
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;">
           <div style="flex:1;min-width:300px;">
@@ -209,12 +209,14 @@ Content-Type:  application/json</pre>
 {
   <span style="color:#7fd6a0;">"checkin"</span>:  <span style="color:#e3c08a;">"2026-09-12"</span>,
   <span style="color:#7fd6a0;">"checkout"</span>: <span style="color:#e3c08a;">"2026-09-15"</span>,
-  <span style="color:#7fd6a0;">"currency"</span>: <span style="color:#e3c08a;">"GBP"</span>,
   <span style="color:#7fd6a0;">"rooms"</span>: [{
     <span style="color:#7fd6a0;">"room_id"</span>: <span style="color:#e3c08a;">"garden-suite"</span>,
     <span style="color:#7fd6a0;">"rate_id"</span>: <span style="color:#e3c08a;">"bed-breakfast"</span>,
-    <span style="color:#7fd6a0;">"adults"</span>:  <span style="color:#9bd1e6;">2</span>
+    <span style="color:#7fd6a0;">"adults"</span>:  <span style="color:#9bd1e6;">2</span>,
+    <span style="color:#7fd6a0;">"extras"</span>: [{ <span style="color:#7fd6a0;">"extra_id"</span>: <span style="color:#e3c08a;">"airport-pickup"</span>, <span style="color:#7fd6a0;">"option_id"</span>: <span style="color:#e3c08a;">"car"</span>,
+                <span style="color:#7fd6a0;">"info"</span>: { <span style="color:#7fd6a0;">"flight"</span>: <span style="color:#e3c08a;">"EI 462"</span> } }]
   }],
+  <span style="color:#7fd6a0;">"extras"</span>: [{ <span style="color:#7fd6a0;">"extra_id"</span>: <span style="color:#e3c08a;">"late-checkout"</span> }],
   <span style="color:#7fd6a0;">"guest"</span>: {
     <span style="color:#7fd6a0;">"first_name"</span>: <span style="color:#e3c08a;">"Jamie"</span>,
     <span style="color:#7fd6a0;">"last_name"</span>:  <span style="color:#e3c08a;">"Doyle"</span>,
