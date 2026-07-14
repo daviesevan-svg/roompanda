@@ -255,9 +255,10 @@ Content-Type:  application/json</pre>
             <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">{
   <span style="color:#7fd6a0;">"mcpServers"</span>: {
     <span style="color:#7fd6a0;">"roompanda"</span>: {
-      <span style="color:#7fd6a0;">"url"</span>: <span style="color:#e3c08a;">"https://mcp.roompanda.com/sse"</span>,
-      <span style="color:#7fd6a0;">"headers"</span>: {
-        <span style="color:#7fd6a0;">"Authorization"</span>: <span style="color:#e3c08a;">"Bearer sk_live_2b1c…"</span>
+      <span style="color:#7fd6a0;">"command"</span>: <span style="color:#e3c08a;">"npx"</span>,
+      <span style="color:#7fd6a0;">"args"</span>: [<span style="color:#e3c08a;">"-y"</span>, <span style="color:#e3c08a;">"@roompanda/mcp"</span>],
+      <span style="color:#7fd6a0;">"env"</span>: {
+        <span style="color:#7fd6a0;">"ROOMPANDA_API_KEY"</span>: <span style="color:#e3c08a;">"sk_live_2b1c…"</span>
       }
     }
   }
@@ -266,14 +267,15 @@ Content-Type:  application/json</pre>
           <div style="flex:1;min-width:300px;">
             <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Exposed tools</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">search_availability</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Find bookable rooms for dates &amp; guests.</div></div>
-              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">get_room</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Full detail, photos &amp; rate plans for a room.</div></div>
-              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">book_room</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Place a real, confirmed reservation.</div></div>
-              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">cancel_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Cancel within your cancellation policy.</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">search_availability</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Priced, bookable rooms &amp; rates for dates &amp; guests.</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">list_extras</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">The add-ons catalogue (breakfast, transfers, …).</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">create_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Place a real reservation (returns a payment link when a deposit is due).</div></div>
+              <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">get_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Retrieve a booking by id.</div></div>
+              <div style="font-size:13px;color:#76796f;padding:2px 4px;">…plus <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_property</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_calendar</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_rooms</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_rates</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_bookings</span> — nine tools covering the whole API.</div>
             </div>
           </div>
         </div>
-        <div style="background:#eaf4ee;border:1px solid #d8ecdf;border-radius:13px;padding:15px 18px;font-size:14px;color:#3c5446;line-height:1.55;display:flex;gap:11px;"><span style="width:8px;height:8px;background:#3e9e63;transform:rotate(45deg);flex:none;margin-top:6px;"></span><div>Agents only see what your token allows. Set per-tool permissions, maximum nightly rates and an optional human-approval step for bookings over a threshold.</div></div>
+        <div style="background:#eaf4ee;border:1px solid #d8ecdf;border-radius:13px;padding:15px 18px;font-size:14px;color:#3c5446;line-height:1.55;display:flex;gap:11px;"><span style="width:8px;height:8px;background:#3e9e63;transform:rotate(45deg);flex:none;margin-top:6px;"></span><div>Agents can't go around your fences: every booking is re-priced and policy-checked server-side (the model's numbers are never trusted), availability and booking cut-offs apply, and deposits still go through Stripe. Use an <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;">sk_test_</span> key to let an agent rehearse with simulated bookings, and revoke any key instantly from your admin.</div></div>
       </section>
 
       <!-- WEBHOOKS -->
