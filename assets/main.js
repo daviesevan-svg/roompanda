@@ -19,26 +19,6 @@
     });
   }
 
-  /* ---- API code tabs (cURL / Node / Python) ---- */
-  var ACTIVE = { bg: '#1b1e20', color: '#7fd6a0' };
-  var INACTIVE = { bg: 'transparent', color: '#7d8079' };
-
-  function styleCodeTab(btn, active) {
-    btn.style.background = active ? ACTIVE.bg : INACTIVE.bg;
-    btn.style.color = active ? ACTIVE.color : INACTIVE.color;
-  }
-
-  var codeTabs = Array.prototype.slice.call(document.querySelectorAll('.codetab'));
-  var codeSamples = Array.prototype.slice.call(document.querySelectorAll('.code-sample'));
-  codeTabs.forEach(function (btn) {
-    styleCodeTab(btn, btn.dataset.codetab === 'curl');
-    btn.addEventListener('click', function () {
-      var id = btn.dataset.codetab;
-      codeTabs.forEach(function (b) { styleCodeTab(b, b.dataset.codetab === id); });
-      codeSamples.forEach(function (s) { s.classList.toggle('active', s.dataset.code === id); });
-    });
-  });
-
   /* ---- Pricing billing toggle (Monthly / Annual) ---- */
   var mBtn = document.getElementById('billMonthly');
   var aBtn = document.getElementById('billAnnual');
