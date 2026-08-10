@@ -63,6 +63,18 @@ a.footlink:hover { color: #f3f1ea; }
   .mobile-menu.open { display: flex !important; }
 }
 
+/* Phone header. Even with the wide links hidden, the row is wordmark + "Start
+   free" + the menu button, which at 390px came to 392px inside a 338px box: the
+   CTA wrapped onto two lines inside its own pill and the menu button was pushed
+   flush against the screen edge. Everything here just buys back the ~55px the
+   row needs. !important because the base values are inline styles. */
+@media (max-width: 480px) {
+  .nav-inner { padding-left: 16px !important; padding-right: 16px !important; gap: 10px !important; }
+  .nav-cta { padding: 9px 13px !important; font-size: 13.5px !important; }
+  .brand-name { font-size: 19px !important; }
+  .brand-mark { width: 32px !important; height: 32px !important; }
+}
+
 /* Dev-docs responsive rules */
 @media (max-width: 920px) {
   [data-toc] { display: none !important; }
