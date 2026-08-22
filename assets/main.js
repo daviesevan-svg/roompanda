@@ -18,36 +18,4 @@
       });
     });
   }
-
-  /* ---- Pricing billing toggle (Monthly / Annual) ---- */
-  var mBtn = document.getElementById('billMonthly');
-  var aBtn = document.getElementById('billAnnual');
-  var wasEl = document.getElementById('hostedWas');
-  var subEl = document.getElementById('hostedSub');
-
-  var SEL = { background: '#ffffff', color: '#2a2c28', shadow: '0 2px 6px -2px rgba(0,0,0,0.18)' };
-  var OFF = { background: 'transparent', color: '#85887e', shadow: 'none' };
-
-  function applyBtn(btn, s) {
-    btn.style.background = s.background;
-    btn.style.color = s.color;
-    btn.style.boxShadow = s.shadow;
-  }
-
-  function setBilling(annual) {
-    applyBtn(mBtn, annual ? OFF : SEL);
-    applyBtn(aBtn, annual ? SEL : OFF);
-    if (annual) {
-      wasEl.textContent = '$33';
-      subEl.textContent = 'Free during early access — normally $390/yr';
-    } else {
-      wasEl.textContent = '$39';
-      subEl.textContent = 'Free during early access — no card needed';
-    }
-  }
-
-  if (mBtn && aBtn) {
-    mBtn.addEventListener('click', function () { setBilling(false); });
-    aBtn.addEventListener('click', function () { setBilling(true); });
-  }
 })();

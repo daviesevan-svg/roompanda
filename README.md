@@ -1,9 +1,9 @@
 # Roompanda — marketing website
 
-The public marketing site for **Roompanda**, the commission-free booking engine for
-independent hotels (built by the Channex team). 0% commission, an API-first
-architecture, PMS integrations (Mews / Apaleo / Channex), and an MCP server that lets
-AI agents make real bookings.
+The public marketing site for **Roompanda**, the guest-facing starter kit for new
+PMS products (built by the Channex team). Channex is the pipe; Roompanda commoditises
+the complement — a live IBE, guest website, vouchers and Google Hotel Ads, on each
+hotel's brand. API-first, with an MCP server so AI agents can make real bookings.
 
 This is a **plain static website** — hand-written HTML, CSS and a little vanilla
 JavaScript. No framework, no build step, no SPA. Just open the files or serve the
@@ -13,10 +13,10 @@ folder.
 
 | File | Purpose |
 | --- | --- |
-| [`index.html`](index.html) | Landing / marketing page (hero, features, live preview, MCP, API, integrations, pricing, signup). |
+| [`index.html`](index.html) | Landing / marketing page aimed at PMS builders (kit, live IBE demo, Channex, MCP, pricing, hotel-via-PMS note). |
 | [`developers.html`](developers.html) | Developer documentation (quickstart, auth, API reference, MCP, webhooks, SDKs). |
 | [`assets/styles.css`](assets/styles.css) | Resets, fonts, animations, hover/focus and responsive rules. Layout values live inline on the elements (they are the final design values). |
-| [`assets/main.js`](assets/main.js) | Landing interactions: API code tabs, pricing Monthly/Annual toggle, mobile menu. |
+| [`assets/main.js`](assets/main.js) | Landing interactions: mobile menu. |
 | [`assets/docs.js`](assets/docs.js) | Docs interactions: SDK npm/pip tabs, mobile menu. |
 | [`assets/favicon.svg`](assets/favicon.svg) | Panda favicon. |
 
