@@ -129,14 +129,13 @@ curl -X POST book.roompanda.com/v1/bookings \
             <span style="width:30px;height:30px;border-radius:50%;background:#16181a;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;">2</span>
             <div style="flex:1;min-width:0;">
               <div style="font-weight:700;font-size:16px;margin-bottom:10px;">Check availability</div>
-              <pre style="background:#16181a;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;color:#d4d7ce;overflow:auto;">curl https://book.roompanda.com/v1/availability\
-  ?checkin=2026-09-12&checkout=2026-09-15&adults=2 \
+              <pre style="background:#16181a;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;color:#d4d7ce;overflow:auto;">curl <span style="color:#e3c08a;">"https://book.roompanda.com/v1/availability?checkin=2026-09-12&amp;checkout=2026-09-15&amp;adults=2"</span> \
   -H <span style="color:#e3c08a;">"Authorization: Bearer sk_test_2b1c…"</span></pre>
             </div>
           </div>
           <div style="display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #ebe6db;border-radius:14px;padding:20px 22px;">
             <span style="width:30px;height:30px;border-radius:50%;background:#3e9e63;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;">3</span>
-            <div><div style="font-weight:700;font-size:16px;margin-bottom:3px;">Make your first call</div><div style="font-size:14.5px;color:#63665d;line-height:1.55;">Fetch availability, then POST a booking. That's the whole loop — see the reference below for every field.</div></div>
+            <div><div style="font-weight:700;font-size:16px;margin-bottom:3px;">Make your first booking</div><div style="font-size:14.5px;color:#63665d;line-height:1.55;">POST the room, rate and guest details to <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">/v1/bookings</span>. That's the whole loop — see the reference below for every field.</div></div>
           </div>
         </div>
       </section>
