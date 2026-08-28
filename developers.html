@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Build on Roompanda — Developer docs</title>
-<meta name="description" content="Roompanda developer documentation: a clean REST API, real-time webhooks, first-party SDKs and an MCP server. Everything you need to wire bookings into anything.">
+<meta name="description" content="Roompanda developer documentation: a clean REST API, a full management API, real-time webhooks, first-party SDKs and an MCP server. Everything you need to wire bookings — and run the whole property — programmatically.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,7 @@
       <nav style="display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:600;color:#55584f;">
         <a class="navlink" href="#quickstart" data-wide="1">Quickstart</a>
         <a class="navlink" href="#api" data-wide="1">API</a>
+        <a class="navlink" href="#manage" data-wide="1">Management</a>
         <a class="navlink" href="#mcp" data-wide="1">MCP</a>
         <a class="navlink" href="#webhooks" data-wide="1">Webhooks</a>
       </nav>
@@ -48,6 +49,7 @@
       <a href="#quickstart" style="padding:10px 0;">Quickstart</a>
       <a href="#auth" style="padding:10px 0;">Authentication</a>
       <a href="#api" style="padding:10px 0;">API reference</a>
+      <a href="#manage" style="padding:10px 0;">Management API</a>
       <a href="#mcp" style="padding:10px 0;">MCP server</a>
       <a href="#webhooks" style="padding:10px 0;">Webhooks</a>
       <a href="#sdks" style="padding:10px 0;">SDKs</a>
@@ -61,7 +63,7 @@
       <div style="flex:1.1;min-width:320px;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.08em;color:#3e9e63;font-weight:600;margin-bottom:16px;">book.roompanda.com/v1</div>
         <h1 class="hero-h1" style="font-family:'Baloo 2',cursive;font-weight:800;font-size:54px;line-height:1.03;letter-spacing:-0.025em;margin:0 0 18px;">Build on Roompanda.</h1>
-        <p style="font-size:18.5px;line-height:1.62;color:#55584f;margin:0 0 26px;max-width:500px;">A clean REST API, real-time webhooks, first-party SDKs and an MCP server — everything you need to wire bookings into anything. Same engine that powers the storefront, fully programmable.</p>
+        <p style="font-size:18.5px;line-height:1.62;color:#55584f;margin:0 0 26px;max-width:500px;">A clean REST API, real-time webhooks, first-party SDKs and an MCP server — plus a full management API that runs the whole property: rooms, rates, content, taxes, website. Same engine that powers the storefront, fully programmable.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a class="btn-green" href="#quickstart" style="background:#3e9e63;color:#fff;font-size:15.5px;font-weight:700;border-radius:12px;padding:14px 24px;box-shadow:0 12px 24px -12px rgba(62,158,99,0.85);">Quickstart</a>
           <a class="btn-outline" href="#api" style="background:#fff;border:1px solid #e3ddcf;color:#2a2c28;font-size:15.5px;font-weight:700;border-radius:12px;padding:14px 24px;">API reference</a>
@@ -103,6 +105,7 @@ curl -X POST book.roompanda.com/v1/bookings \
         <a class="toc-link" href="#quickstart" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Quickstart</a>
         <a class="toc-link" href="#auth" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Authentication</a>
         <a class="toc-link" href="#api" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">API reference</a>
+        <a class="toc-link" href="#manage" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Management API</a>
         <a class="toc-link" href="#mcp" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">MCP server</a>
         <a class="toc-link" href="#webhooks" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">Webhooks</a>
         <a class="toc-link" href="#sdks" style="padding:7px 12px;border-radius:9px;color:#55584f;border-left:2px solid #e7e1d4;">SDKs</a>
@@ -143,7 +146,7 @@ curl -X POST book.roompanda.com/v1/bookings \
       <!-- AUTH -->
       <section id="auth" style="margin-bottom:54px;scroll-margin-top:80px;">
         <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">Authentication</h2>
-        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 20px;max-width:640px;">Every request carries a bearer key. Keys are <strong>scoped to a single property</strong> and created in your admin under <strong>API keys</strong>. Test keys (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_test_</span>) create simulated bookings; live keys (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_live_</span>) create real ones. The key is shown once — store it server-side; revoke it any time.</p>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 20px;max-width:640px;">Every request carries a bearer key. Keys are <strong>scoped to a single property</strong> and created in your admin under <strong>API keys</strong>. There are two kinds, deliberately disjoint: <strong>booking keys</strong> (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_test_</span> simulates, <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_live_</span> books for real) search and book; <strong>management keys</strong> (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#9a6b2f;">ak_live_</span>) read and edit the property via <a href="#manage" style="color:#2f7d4d;font-weight:600;">the management API</a> — and neither can do the other's job, so a leaked key's blast radius is readable from its prefix. Every key is shown once — store it server-side; revoke it any time.</p>
         <pre style="background:#16181a;border-radius:13px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:#d4d7ce;overflow:auto;">Authorization: Bearer sk_test_2b1c…
 Content-Type:  application/json</pre>
       </section>
@@ -242,15 +245,72 @@ Content-Type:  application/json</pre>
         </div>
       </section>
 
+      <!-- MANAGEMENT API -->
+      <section id="manage" style="margin-bottom:54px;scroll-margin-top:80px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#eaf4ee;color:#2f7d4d;border-radius:999px;padding:5px 13px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:14px;">ak_ keys</div>
+        <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">Management API</h2>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 14px;max-width:660px;">Everything the admin can do, as an API — 60+ operations under <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">/v1/manage</span>, built for PMS integrations and AI agents. Writes are sparse <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">PATCH</span>es (omitted fields stay, <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">null</span> clears) and validation is loud: unknown fields, bad enums and broken cross-field rules come back as per-field <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">422</span>s, never silent drops.</p>
+        <div style="background:#fff;border:1px solid #ebe6db;border-radius:16px;overflow:hidden;margin-bottom:14px;">
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/property<span style="color:#9a9c92;">, …/property/content</span></span>
+            <span style="font-size:14px;color:#76796f;">Settings (currency, times, address, policies, languages) &amp; per-language text</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/rooms<span style="color:#9a9c92;">, …/rates, …/taxes</span></span>
+            <span style="font-size:14px;color:#76796f;">Room types, rate plans with structured cancellation policies, the tax &amp; fee document</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/extras<span style="color:#9a9c92;">, …/promotions, …/voucher-products</span></span>
+            <span style="font-size:14px;color:#76796f;">Add-ons, promo codes &amp; automatic offers, the sellable voucher catalogue</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/site<span style="color:#9a9c92;">, …/gallery, …/content, …/brand</span></span>
+            <span style="font-size:14px;color:#76796f;">Website pages &amp; sections, photo gallery, funnel copy, theme — all per-language where it's text</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/images<span style="color:#9a9c92;">, …/images/import</span></span>
+            <span style="font-size:14px;color:#76796f;">Upload a photo (multipart) or import any public https image URL</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;border-bottom:1px solid #f0ece2;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/emails<span style="color:#9a9c92;">, …/team, …/webhooks, …/reviews</span></span>
+            <span style="font-size:14px;color:#76796f;">Transactional email templates, teammates &amp; access areas, webhook endpoints, review replies</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:center;padding:15px 22px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;flex:1;min-width:230px;">/v1/manage/bookings<span style="color:#9a9c92;">, …/ari</span></span>
+            <span style="font-size:14px;color:#76796f;">Read-only: the booking list &amp; the live availability/rates/restrictions grid, for reconciliation</span>
+          </div>
+        </div>
+        <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;margin-bottom:14px;"><span style="color:#7d8079;"># rename the room &amp; set its capacity — omitted fields stay put</span>
+curl -X PATCH book.roompanda.com/v1/manage/rooms/&lt;room_id&gt; \
+  -H <span style="color:#e3c08a;">"Authorization: Bearer ak_live_9f2e…"</span> \
+  -d '{ "title": "Garden Suite", "max_adults": 2, "max_guests": 3 }'
+
+<span style="color:#7d8079;"># give it a photo from any public image URL</span>
+curl -X POST book.roompanda.com/v1/manage/images/import \
+  -H <span style="color:#e3c08a;">"Authorization: Bearer ak_live_9f2e…"</span> \
+  -d '{ "url": "https://your-cdn.example/garden-suite.jpg" }'
+<span style="color:#7fd6a0;">→ 201  { "data": { "url": "/images/manage/…/1c9e….jpg" } }</span></pre>
+        <div style="background:#f6ecdb;border:1px solid #eedfc2;border-radius:13px;padding:15px 18px;font-size:14px;color:#5c4a2e;line-height:1.55;display:flex;gap:11px;"><span style="width:8px;height:8px;background:#c98a4b;transform:rotate(45deg);flex:none;margin-top:6px;"></span><div><strong>The boundaries are the design.</strong> Availability, date-level prices and bookings are <strong>read-only</strong> here — they flow from your channel manager, and two writers would fight. Reviews are respond-only (a property answers criticism, it can't bury it), and money actions — refunds, sold-voucher edits, payment onboarding — stay in the admin. The full surface is in the live <a href="https://book.roompanda.com/v1/openapi.json" style="color:#8a5a1f;font-weight:600;">OpenAPI spec</a>.</div></div>
+      </section>
+
       <!-- MCP -->
       <section id="mcp" style="margin-bottom:54px;scroll-margin-top:80px;">
         <div style="display:inline-flex;align-items:center;gap:8px;background:#f6ecdb;color:#9a6b2f;border-radius:999px;padding:5px 13px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:14px;">Model Context Protocol</div>
         <h2 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:32px;letter-spacing:-0.02em;margin:0 0 8px;">MCP server</h2>
-        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 22px;max-width:660px;">Built on the same REST API: point any MCP-compatible AI client at Roompanda and it can search, price and book on a guest's behalf — using the same per-property keys and policy fences. Bookings are real and land straight in your calendar. Add it with the config below (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;">npx @roompanda/mcp</span>); source on GitHub (<a href="https://github.com/daviesevan-svg/roompanda-mcp" style="color:#2f7d4d;font-weight:600;">roompanda-mcp ↗</a>).</p>
+        <p style="font-size:16.5px;line-height:1.6;color:#55584f;margin:0 0 22px;max-width:660px;">Built on the same REST API, and the tools follow the key: a booking key (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2f7d4d;">sk_…</span>) lets an agent search, price and book on a guest's behalf; a management key (<span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#9a6b2f;">ak_…</span>) unlocks <strong>50+ admin tools</strong> — edit rooms, rates, taxes, content, the website, import photos — with bookings and availability kept read-only. Same policy fences either way. Connect the <strong>remote server</strong> directly (nothing to install), or run the <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">npx @roompanda/mcp</span> wrapper for stdio-only clients (<a href="https://github.com/daviesevan-svg/roompanda-mcp" style="color:#2f7d4d;font-weight:600;">source ↗</a>).</p>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Remote server — no install</div>
+          <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;"><span style="color:#7d8079;"># Claude Code</span>
+claude mcp add roompanda --transport http https://book.roompanda.com/mcp \
+  --header <span style="color:#e3c08a;">"Authorization: Bearer ak_live_9f2e…"</span>
+
+<span style="color:#7d8079;"># any streamable-HTTP client: point it at the URL with that header</span></pre>
+        </div>
 
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;">
           <div style="flex:1;min-width:300px;">
-            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Connect a client</div>
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">npx wrapper — for stdio-only clients</div>
             <pre style="background:#16181a;border-radius:13px;padding:16px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#d4d7ce;overflow:auto;">{
   <span style="color:#7fd6a0;">"mcpServers"</span>: {
     <span style="color:#7fd6a0;">"roompanda"</span>: {
@@ -264,13 +324,13 @@ Content-Type:  application/json</pre>
 }</pre>
           </div>
           <div style="flex:1;min-width:300px;">
-            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Exposed tools</div>
+            <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9a9c92;font-weight:700;margin-bottom:8px;">Booking tools (sk_ keys)</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">search_availability</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Priced, bookable rooms &amp; rates for dates &amp; guests.</div></div>
               <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">list_extras</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">The add-ons catalogue (breakfast, transfers, …).</div></div>
               <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">create_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Place a real reservation (returns a payment link when a deposit is due).</div></div>
               <div style="background:#fff;border:1px solid #ebe6db;border-radius:12px;padding:14px 16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#2f7d4d;">get_booking</span><div style="font-size:13.5px;color:#63665d;margin-top:3px;">Retrieve a booking by id.</div></div>
-              <div style="font-size:13px;color:#76796f;padding:2px 4px;">…plus <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_property</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_calendar</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_rooms</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_rates</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_bookings</span> — nine tools covering the whole API.</div>
+              <div style="font-size:13px;color:#76796f;padding:2px 4px;">…plus <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_property</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">get_calendar</span> and <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_rates</span>. With a management key the remote server advertises the admin set instead — <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">create_room</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">update_rate_plan</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">set_tax_config</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">import_image</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">update_page_copy</span>, <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">respond_to_review</span> and 40-odd more.</div>
             </div>
           </div>
         </div>
